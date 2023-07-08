@@ -1,4 +1,5 @@
 import sys
+import os
 
 
 def adjust_timestamp(timestamp, offset):
@@ -36,7 +37,11 @@ def main():
         else:
             adjusted_lines.append(line)
 
-    output_file = f"adjusted_{input_file}"
+    output_file = (
+        os.path.splitext(input_file)[0]
+        + f"-adjusted{offset}"
+        + os.path.splitext(input_file)[1]
+    )
     with open(output_file, "w") as file:
         file.writelines(adjusted_lines)
 
